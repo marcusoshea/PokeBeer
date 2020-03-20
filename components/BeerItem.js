@@ -5,7 +5,7 @@ import { Image } from 'react-native-elements';
 const BeerItem = props => {
   return (
     <TouchableOpacity
-      onPress={props.onDelete.bind(this, props.id)}
+      onPress={props.onTouch.bind(this, props.id)}
       activeOpacity={0.7}
     >
       <View style={styles.beerList}>

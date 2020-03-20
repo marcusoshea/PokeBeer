@@ -13,6 +13,13 @@ const BeerInput = props => {
     drinkBeer("");
   };
 
+  const titleValue = () => {
+    if (props?.beerToModify[0]?.value !== undefined) {
+      return props.beerToModify[0].value;
+    }
+    return beerDrank;
+  };
+
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
@@ -20,7 +27,7 @@ const BeerInput = props => {
           placeholder="Pick your poison"
           style={styles.input}
           onChangeText={beerInputHandler}
-          value={beerDrank}
+          value={titleValue()}
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
@@ -33,6 +40,7 @@ const BeerInput = props => {
       </View>
     </Modal>
   );
+
 };
 
 const styles = StyleSheet.create({

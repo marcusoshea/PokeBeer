@@ -10,6 +10,7 @@ import Colors from "./constants/colors";
 export default function App() {
   const [Beers, setBeers] = useState([]);
   const [isAddMode, setIsAddMode] = useState(false);
+  const [beerToEdit, setbeerToEdit] = useState({});
 
   const addBeerHandler = beerTitle => {
     setBeers(() => [
@@ -28,12 +29,17 @@ export default function App() {
     });
   };
 
+  const editBeerHandler = beerId => {
+    setbeerToEdit(Beers.filter(beer => beer.id == beerId));
+    setIsAddMode(true);
+  };
+
   const cancelBeerAdditionHandler = () => {
     setIsAddMode(false);
   };
 
   return (
-    <View>
+    <View style={styles.screen}>
       <View style={styles.header}>
 
         <View style={styles.headerTitleContainer}>
@@ -49,18 +55,19 @@ export default function App() {
             style={styles.iconBeer} />
         </View>
       </View>
-      <View style={styles.screen} >
+      <View style={styles.body} >
         <BeerInput
           visible={isAddMode}
           onPouredBeer={addBeerHandler}
           onCancel={cancelBeerAdditionHandler}
+          beerToModify={beerToEdit}
         />
-        <FlatList
+        <FlatList 
           data={Beers}
           renderItem={itemData => (
             <BeerItem
               id={itemData.item.id}
-              onDelete={removeBeerHandler}
+              onTouch={editBeerHandler}
               title={itemData.item.value}
             />
           )}
@@ -72,6 +79,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   screen: {
+    flex: 10,
+    paddingBottom: 100
+  },
+  body: {
     padding: 25,
     paddingTop: 50,
     paddingBottom: 35
