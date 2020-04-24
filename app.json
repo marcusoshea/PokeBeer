@@ -1,9 +1,10 @@
 {
   "expo": {
-    "name": "Blank Template",
+    "name": "PokeBeer",
     "slug": "PokeBeer",
+    "description": "A drink tracking application to rate your favorite and not so favorite drinks ",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android",
@@ -11,20 +12,24 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./app/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./app/assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#7f70e7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "app/assets/*"
     ],
+    "android": {
+      "package": "com.moshea.pokebeer"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.moshea.pokebeer"
     }
   }
 }

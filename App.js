@@ -1,113 +1,85 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Button, FlatList, Text } from "react-native";
-import { Icon } from 'react-native-elements'
+// Imports: Dependencies
+import React from 'react';
+import { View, Text, Image } from 'react-native';
+import { PersistGate } from 'redux-persist/es/integration/react'
+import { Provider } from 'react-redux';
 
-import BeerItem from "./components/BeerItem";
-import BeerInput from "./components/BeerInput";
+import { Font, AppLoading } from 'expo';
+// import * as Font from 'expo-font';
 
-import Colors from "./constants/colors";
+/*import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+import { Asset } from 'expo-asset';*/
+import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
 
-export default function App() {
-  const [Beers, setBeers] = useState([]);
-  const [isAddMode, setIsAddMode] = useState(false);
-  const [beerToEdit, setbeerToEdit] = useState({});
+import { StyleProvider, Root } from 'native-base';
+import getTheme from './app/theme/components';
+import material from './app/theme/variables/material';
 
-  const addBeerHandler = beerTitle => {
-    setBeers(() => [
-      ...Beers,
-      {
-        id: Math.random().toString(),
-        value: beerTitle
-      }
-    ]);
-    setIsAddMode(false);
-  };
+// Imports: Navigation
+import ReduxNavigation from './app/navigation/ReduxNavigation';
 
-  const removeBeerHandler = beerId => {
-    setBeers(currentBeers => {
-      return currentBeers.filter(beer => beer.id != beerId);
-    });
-  };
+// Imports: Redux Persist Persister
+import { store, persistor } from './app/store/store';
 
-  const editBeerHandler = beerId => {
-    setbeerToEdit(Beers.filter(beer => beer.id == beerId));
-    setIsAddMode(true);
-  };
 
-  const cancelBeerAdditionHandler = () => {
-    setIsAddMode(false);
-  };
-
-  return (
-    <View style={styles.screen}>
-      <View style={styles.header}>
-
-        <View style={styles.headerTitleContainer}>
-          <Text style={styles.headerTitleText}>PokéBeer</Text>
-        </View>
-        <View style={styles.headerIconContainer}>
-          <Icon
-            raised
-            name='beer'
-            type='font-awesome'
-            color='#f28e1c'
-            onPress={() => setIsAddMode(true)}
-            style={styles.iconBeer} />
-        </View>
-      </View>
-      <View style={styles.body} >
-        <BeerInput
-          visible={isAddMode}
-          onPouredBeer={addBeerHandler}
-          onCancel={cancelBeerAdditionHandler}
-          beerToModify={beerToEdit}
-        />
-        <FlatList 
-          data={Beers}
-          renderItem={itemData => (
-            <BeerItem
-              id={itemData.item.id}
-              onTouch={editBeerHandler}
-              title={itemData.item.value}
-            />
-          )}
-        />
-      </View>
-    </View>
-  );
+function cacheImages(images) {
+  return images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
 }
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 10,
-    paddingBottom: 100
-  },
-  body: {
-    padding: 25,
-    paddingTop: 50,
-    paddingBottom: 35
-  },
-  header: {
-    width: "100%",
-    height: 100,
-    paddingTop: 36,
-    paddingLeft: 10,
-    paddingRight: 10,
-    backgroundColor: Colors.primary,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  headerTitleText: {
-    color: "black",
-    fontSize: 18,
-    fontWeight: "bold"
-  },
-  headerTitleContainer: {
-    flex: 1,
-    alignItems: 'flex-start'
-  },
-  headerIconContainer: {
-    alignItems: 'flex-end'
+function cacheFonts(fonts) {
+  return fonts.map(font => Font.loadAsync(font));
+}
+
+// React Native: App
+export default class App extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      isReady: false,
+    }
   }
-});
+
+  async componentWillMount() {
+    await Font.loadAsync({
+      // 'Ionicons': require('native-base/Fonts/Ionicons.ttf'),
+      ...Ionicons.font,
+      ...FontAwesome.font,
+      ...AntDesign.font,
+      'Font-Light': require('./app/assets/fonts/Montserrat-Light.ttf'),
+      'Font-Regular': require('./app/assets/fonts/Montserrat-Regular.ttf'),
+      'Font-Semibold': require('./app/assets/fonts/Montserrat-SemiBold.ttf'),
+      'Font-Bold': require('./app/assets/fonts/Montserrat-Bold.ttf'),
+    });
+    this.setState({isReady: true});
+  }
+
+  render() {
+    if (!this.state.isReady) {
+      return (
+        <AppLoading />
+      );
+    }
+    return (
+      // Redux: Global Store
+      <Provider store={store}>
+        <PersistGate 
+          loading={<AppLoading />}
+          persistor={persistor}
+        >
+          <StyleProvider style={getTheme(material)}>
+            <Root>
+              <ReduxNavigation />
+            </Root>
+          </StyleProvider>
+        </PersistGate>
+      </Provider>
+    );
+  }
+};
