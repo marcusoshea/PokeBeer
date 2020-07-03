@@ -43,5 +43,49 @@ export default {
   linky: {
     color: 'blue',
     paddingTop: 10
-  }
+  },
+
+
+
+
+
+    screen: {
+      flex: 10,
+      paddingBottom: 100
+    },
+    body: {
+      padding: 25,
+      paddingTop: 50,
+      paddingBottom: 35
+    },
+    header: {
+      width: "100%",
+      height: 100,
+      paddingTop: 36,
+      paddingLeft: 10,
+      paddingRight: 10,
+      backgroundColor: Colors.primary,
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "row",
+    },
+    headerTitleText: {
+      color: "black",
+      fontSize: 18,
+      fontWeight: "bold"
+    },
+    headerTitleContainer: {
+      flex: 1,
+      alignItems: 'flex-start'
+    },
+    headerIconContainer: {
+      alignItems: 'flex-end'
+    }
+
+  
+
+
+
+
+
 };

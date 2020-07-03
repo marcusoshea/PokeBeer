@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 import { StyleSheet, View, ImageBackground, Image} from 'react-native'
 import _ from 'lodash'; 
 import { Layout, Colors, Screens } from '../../constants';
-import { Logo, Svgicon, Headers } from '../../components';
+import { Logo, Svgicon, Headers, BeerItem, BeerInput } from '../../components';
 import imgs from '../../assets/images';
 import {
   Container,
@@ -17,6 +17,8 @@ import { connect } from "react-redux";
 import * as userActions from "../../actions/user";
 import appStyles from '../../theme/appStyles';
 import styles from './styles';
+
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +33,12 @@ class Home extends React.Component {
           <Content enableOnAndroid style={appStyles.content}>
             <View style={appStyles.contentBg}>
               <Text>Lets fills this thing up</Text>
+
+
+
+
+
+
             </View>
           </Content>
          </ImageBackground>
@@ -38,6 +46,7 @@ class Home extends React.Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,

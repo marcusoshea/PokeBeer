@@ -20,7 +20,6 @@ export default {
     icon:'settings',
     label: Strings.settings,
   },
-
   SignOutStack : {
     route: 'SignOutStack'
   }, 
@@ -33,4 +32,7 @@ export default {
   ForgotPassword : {
     route: 'ForgotPassword'
   }, 
+  AddEditDrink : {
+    route: 'AddEditDrink'
+  }
 };

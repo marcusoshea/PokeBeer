@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableWithoutFeedback } from 'react-native';
 import { connect } from "react-redux";
 import * as Animatable from 'react-native-animatable';
+import { NavigationActions } from 'react-navigation'
 
 import {
   Button,
@@ -11,9 +12,10 @@ import {
 
 import appStyles from '../theme/appStyles';
 import svgs from '../assets/svgs';
-import { Colors, Layout, ActionTypes } from '../constants';
+import { Colors, Layout, ActionTypes, Screens } from '../constants';
 import Logo from './Logo';
 import Svgicon from './Svgicon';
+
 
 class Headers extends React.Component {
   constructor(props) {
@@ -22,6 +24,7 @@ class Headers extends React.Component {
       visibleModal:false
     }
   }
+
   render() {
     return (
         <Header transparent>
@@ -36,7 +39,7 @@ class Headers extends React.Component {
             </TouchableWithoutFeedback>
           </Body>
           <Right style={appStyles.row}>
-            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+            <Button transparent style={appStyles.menuBtn} onPress={() => this.props.navigation.navigate(Screens.AddEditDrink.route)}>
               <Svgicon color={Colors.white} name="plus"/>
             </Button>
           </Right>

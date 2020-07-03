@@ -6,6 +6,8 @@ import InputBox from "./InputBox";
 import ModalBox from "./ModalBox";
 import Svgicon from "./Svgicon";
 import Headers from "./Headers";
+import BeerItem from "./BeerItem";
+import BeerInput from "./BeerInput";
 
 export { 
 	Loader, 
@@ -16,4 +18,6 @@ export {
 	ModalBox, 
 	Svgicon, 
 	Headers, 
+	BeerItem,
+	BeerInput
 };
