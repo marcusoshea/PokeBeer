@@ -36,8 +36,8 @@ class Headers extends React.Component {
             </TouchableWithoutFeedback>
           </Body>
           <Right style={appStyles.row}>
-            <Button transparent>
-              <Svgicon color={Colors.white} name="bell" />
+            <Button transparent onPress={() => this.props.navigation.openDrawer()}>
+              <Svgicon color={Colors.white} name="plus"/>
             </Button>
           </Right>
         </Header>

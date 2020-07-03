@@ -2,7 +2,7 @@ import {Colors,Layout} from '../../constants/';
 export default {
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },

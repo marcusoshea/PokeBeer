@@ -52,7 +52,6 @@ export default {
   badgePadding: 0,
 
   // Button
-  buttonFontFamily: 'Arial',
   buttonDisabledBg: '#b5b5b5',
   buttonPadding: 6,
   get buttonPrimaryBg() {
@@ -126,7 +125,7 @@ export default {
   brandPrimary: '#3F51B5',
   brandInfo: '#62B1F6',
   brandSuccess: '#5cb85c',
-  brandDanger: '#d9534f',
+  brandDanger: '#E9967A',
   brandWarning: '#f0ad4e',
   brandDark: '#000',
   brandLight: '#f4f4f4',
@@ -143,7 +142,6 @@ export default {
 
   // Font
   DefaultFontSize: 16,
-  fontFamily: 'Arial',
   fontSizeBase: 15,
   get fontSizeH1() {
     return this.fontSizeBase * 1.8;
@@ -269,7 +267,6 @@ export default {
   },
 
   // Title
-  titleFontfamily: 'Arial',
   titleFontSize: 19,
   subTitleFontSize: 14,
   subtitleColor: '#FFF',

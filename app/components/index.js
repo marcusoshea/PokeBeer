@@ -1,5 +1,4 @@
 import Loader from "./Loader";
-import AppIntro from "./AppIntro";
 import Logo from "./Logo";
 import Statusbar from "./Statusbar";
 import LoginBackIcon from "./LoginBackIcon";
@@ -10,7 +9,6 @@ import Headers from "./Headers";
 
 export { 
 	Loader, 
-	AppIntro, 
 	Logo, 
 	Statusbar, 
 	LoginBackIcon, 

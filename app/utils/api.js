@@ -41,7 +41,7 @@ const execute = async (path, method = 'GET', { params = {} , queries = {}, paylo
   const options = { method, headers };
 
   if (method === 'POST' || method === 'PATCH') {
-    options.data = querystring.stringify(payloads);
+    options.data = JSON.stringify(payloads);
   }
 
   if (queries) {

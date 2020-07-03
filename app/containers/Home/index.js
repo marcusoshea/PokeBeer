@@ -30,11 +30,11 @@ class Home extends React.Component {
           <Headers {...this.props} />
           <Content enableOnAndroid style={appStyles.content}>
             <View style={appStyles.contentBg}>
+              <Text>Lets fills this thing up</Text>
             </View>
           </Content>
          </ImageBackground>
-      </Container>
-     
+      </Container>     
     );
   }
 }

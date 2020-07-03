@@ -39,7 +39,7 @@ export default StyleSheet.create({
     marginTop: Layout.indent
   },
   contentBg:{
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.secondaryLight,
     padding: Layout.indent,
     flex:1
   },
@@ -184,8 +184,11 @@ export default StyleSheet.create({
     fontSize:14
   },
   inputError:{
-    color: Colors.red,
+    color: Colors.white,
     top:20,
     fontSize:12
+  },
+  mainHeader:{
+    color: Colors.black
   }
 });

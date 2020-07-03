@@ -7,9 +7,13 @@ import { getLanguage } from '../utils/common';
 
 export const signin = payloads => dispatch => {
   dispatch({ type: ActionTypes.LOADING, isLoading: true });
-  return axios.post(url.signin,  {payloads: payloads})
+  var headers = {
+    'Content-Type': 'application/json'
+  }
+
+  return axios.post(url.signin, {payloads,  headers})
   .then(res => {
-    // console.log("res", res.data);
+    console.log("res", res.data);
     dispatch({ type: ActionTypes.LOADING, isLoading: false });
       if(res.status == 200){
         if(res.data.status==200){
@@ -19,6 +23,8 @@ export const signin = payloads => dispatch => {
       } else {
         return res
       }
+    }).catch((err) => {
+      console.log("ERROR: ====", err);
     });
 }
 

@@ -19,7 +19,7 @@ import { submit } from 'redux-form';
 import * as Animatable from 'react-native-animatable';
 
 import { Layout, Colors, Screens, ActionTypes } from '../../constants';
-import { Logo, Statusbar, Loader, AppIntro } from '../../components';
+import { Logo, Statusbar, Loader } from '../../components';
 import imgs from '../../assets/images';
 import * as userActions from "../../actions/user";
 import { showToast } from '../../utils/common';
@@ -39,11 +39,6 @@ class SignIn extends React.Component {
     if(this.props.user!=null){
       this.props.navigation.navigate(Screens.SignInStack.route);
     }
-    setTimeout(()=>{
-      if(this.props.languageSet==0 && !this.props.showIntro){
-        this.props.showModal();
-      }
-    },2000);
   }
 
   onSignupButtonPressHandler(){
@@ -67,11 +62,13 @@ class SignIn extends React.Component {
     dispatch(userActions.signin(values))
       .then(res => {
         serverFail = false;
-        if(res.status == 200){
-          showToast(res.msg,"success");
-          dispatch(NavigationActions.navigate({ routeName: Screens.SignInStack.route }));
+        if(res?.token?.length > 0){
+          dispatch(NavigationActions.navigate({ routeName: Screens.Home.route }));
         } else {
-          showToast(res.msg,"danger");
+          showToast("Email/Password incorrect","danger");
+          setTimeout(() => {
+            dispatch({ type: ActionTypes.LOADING, isLoading: false });
+          }, 3000);
         }
       })
       .catch(error => {
@@ -79,6 +76,7 @@ class SignIn extends React.Component {
         message = (_.values(messages) || []).join(',')
         if (message){
          showToast(message,"danger");
+         dispatch({ type: ActionTypes.LOADING, isLoading: false });
        }
        console.log(`
           Error messages returned from server:`, messages )
@@ -87,9 +85,6 @@ class SignIn extends React.Component {
 
   render(){
     const { language } = this.props;
-    if(this.props.showIntro){
-        return (<AppIntro />);
-    }
     if(this.props.user==null){
       // Login 
       return (
@@ -146,7 +141,7 @@ class SignIn extends React.Component {
                         style={appStyles.btnSecontary}
                         onPress={() => this.props.pressSignin()}
                       >
-                        <Text> Signin </Text>
+                        <Text> Sign in </Text>
                       </Button>
                   }
                 </Animatable.View>  
@@ -157,7 +152,7 @@ class SignIn extends React.Component {
        
       );
     }else{
-      // Authendicating
+      // Authenticating
       return (<Loader />);
     }
   }
@@ -166,7 +161,6 @@ class SignIn extends React.Component {
 const mapStateToProps = (state) => {
   // Redux Store --> Component
   return {
-    showIntro: state.auth.showIntro,
     isLoading: state.common.isLoading,
     user: state.auth.user,
     language: state.auth.language,

@@ -9,8 +9,3 @@ export const showModal = bool => ({
     type: ActionTypes.SHOWMODAL,
     showModal: bool,
 });
-
-export const showIntro = bool => ({
-    type: ActionTypes.SHOWINTRO,
-    showIntro: bool,
-});

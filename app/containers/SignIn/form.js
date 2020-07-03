@@ -17,7 +17,7 @@ class SignInForm extends React.Component {
     return (
       <Form onSubmit={handleSubmit(onSubmit)} style={styles.loginForm}>
         <Field 
-          name="email" 
+          name="username" 
           component={InputBox} 
           placeholder="Email"
           keyboardType={'email-address'}

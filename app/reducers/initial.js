@@ -6,7 +6,6 @@ export const initialState = {
 	},
 	auth:{
 		user: null,
-		showIntro: true,
 		language:getLanguage(0),
 		languageId:0,
 		languageSet:0
