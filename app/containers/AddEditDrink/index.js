@@ -31,18 +31,21 @@ class AddEditDrink extends React.Component {
     super(props);
     this.listItems = [ Screens.Home,Screens.Settings, Screens.AddEditDrink];
   }
-
-  render() {
+  render(){
     return (
-      <Container>
-        <Content>
-
-        </Content>
-        <Footer style={styles.logoutFooter}>
-
-        </Footer>
-      </Container>
-    )
+      <Container style={appStyles.container}>
+        <ImageBackground 
+            source={imgs.bg} 
+            style={ { width: Layout.window.width, height: Layout.window.height }}>
+         
+          <Content enableOnAndroid style={appStyles.content}>
+            <View style={appStyles.contentBg}>
+              <Text>Screen for adding and editing drinks</Text>
+            </View>
+          </Content>
+         </ImageBackground>
+      </Container>     
+    );
   }
 }
 

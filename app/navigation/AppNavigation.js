@@ -79,7 +79,8 @@ const LoginStack = createStackNavigator({
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
   [Screens.SignOutStack.route]: { screen: LoginStack },
-  [Screens.SignInStack.route]: { screen: DrawerNavigation }
+  [Screens.SignInStack.route]: { screen: DrawerNavigation },
+  [Screens.AddEditDrink.route]: { screen: AddEditDrink }
 }, {
   headerMode: 'none',
   title: Screens.Title,

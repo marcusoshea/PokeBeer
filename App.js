@@ -3,13 +3,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { PersistGate } from 'redux-persist/es/integration/react'
 import { Provider } from 'react-redux';
-
 import { Font, AppLoading } from 'expo';
-// import * as Font from 'expo-font';
-
-/*import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import { Asset } from 'expo-asset';*/
 import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
 
 import { StyleProvider, Root } from 'native-base';
@@ -21,7 +15,6 @@ import ReduxNavigation from './app/navigation/ReduxNavigation';
 
 // Imports: Redux Persist Persister
 import { store, persistor } from './app/store/store';
-
 
 function cacheImages(images) {
   return images.map(image => {
