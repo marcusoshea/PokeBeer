@@ -48,6 +48,7 @@ const persistConfig = {
   // Whitelist (Save Specific Reducers)
   whitelist: [
     'auth',
+    'beer'
   ],
   // Blacklist (Don't Save Specific Reducers)
   blacklist: [

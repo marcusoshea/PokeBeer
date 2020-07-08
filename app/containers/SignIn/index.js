@@ -36,7 +36,7 @@ class SignIn extends React.Component {
   }
 
   componentDidMount() {
-    if(this.props.user!=null){
+    if(this.props.user!=null && this.props.token!=null){
       this.props.navigation.navigate(Screens.SignInStack.route);
     }
   }
@@ -85,7 +85,7 @@ class SignIn extends React.Component {
 
   render(){
     const { language } = this.props;
-    if(this.props.user==null){
+    if(this.props.user==null || this.props.token==null){
       // Login 
       return (
         <Container style={appStyles.container}>
@@ -163,6 +163,7 @@ const mapStateToProps = (state) => {
   return {
     isLoading: state.common.isLoading,
     user: state.auth.user,
+    token: state.auth.token,
     language: state.auth.language,
     languageSet: state.auth.languageSet || 0,
   };

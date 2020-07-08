@@ -13,15 +13,12 @@ export const signin = payloads => dispatch => {
 
   return axios.post(url.signin, {payloads,  headers})
   .then(res => {
-    console.log("res", res.data);
     dispatch({ type: ActionTypes.LOADING, isLoading: false });
       if(res.status == 200){
-        if(res.data.status==200){
-          dispatch({ type: ActionTypes.SIGNIN, data: res.data.data.user });
-        }
+        dispatch({ type: ActionTypes.SIGNIN, data: res.data });
         return res.data
       } else {
-        return res
+        return
       }
     }).catch((err) => {
       console.log("ERROR: ====", err);

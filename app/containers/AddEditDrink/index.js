@@ -53,6 +53,7 @@ const mapStateToProps = (state) => {
   return {
     state: state,
     user: state.auth.user,
+    token: state.auth.token,
     language: state.auth.language,
   };
 };
