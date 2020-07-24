@@ -24,4 +24,4 @@ Drawer Screen:
     Add easier way to close
     
 Screenshot:
-    ![Image of Screenshot](https://github.com/marcusoshea/PokeBeer/blob/master/screen shot.png)
+    ![Image of Screenshot](https://github.com/marcusoshea/PokeBeer/blob/master/Screen%20Shot.png)
