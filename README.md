@@ -3,4 +3,22 @@ Using this to learn React Native and create a beer tracking application
 
 Will use the other repo HoldMyBeer as the backend & Postgres as db.
 
-Still a lot of work to do.
+Beta Complete:
+Login Screen:
+    Completed
+Home Screen:
+    Show beer name, description, rating
+
+Still a lot of work TODO:
+Home Screen:
+    Search
+    Sort
+    Infinite Scroll
+Add/Edit Screen:
+    Form for adding/editing
+Settings Screen:
+    Change Email
+    Change Password
+    Delete Account
+Drawer Screen:
+    Add easier way to close

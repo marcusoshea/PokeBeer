@@ -55,7 +55,6 @@ class Home extends React.Component {
             readonly
             ratingColor='black'
             tintColor={Colors.secondaryLight}
-            onFinishRating={() => this.addOrEditBeerToNavigate(this.props.beerList[i])}
           />
           <Button transparent style={appStyles.rowBtn} onPress={() => this.addOrEditBeerToNavigate(this.props.beerList[i])}>
             <Svgicon color={Colors.black} name="arrow-right" />
