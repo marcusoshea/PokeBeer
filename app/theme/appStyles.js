@@ -40,10 +40,11 @@ export default StyleSheet.create({
   },
   contentBg:{
     backgroundColor: Colors.secondaryLight,
-    padding: Layout.indent,
+    paddingLeft: Layout.indent,
+    paddingRight: Layout.indent,
     flex:1,
-    padding: 10,
-    margin: 10
+    margin: 10,
+    borderRadius: 4
   },
   modalContent: {
     backgroundColor: 'white',
@@ -107,7 +108,8 @@ export default StyleSheet.create({
   },
   rowBtn: {
     justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    top: -35
   },
   drawerList:{
     margin:0,
