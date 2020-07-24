@@ -1,21 +1,15 @@
 import React from "react";
-import { View, TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 import { connect } from "react-redux";
-import * as Animatable from 'react-native-animatable';
-import { NavigationActions } from 'react-navigation'
-
 import {
   Button,
   Text,
-  Header, Left, Body, Title, Right
+  Header, Left, Body, Right
 } from 'native-base';
-
 import appStyles from '../theme/appStyles';
-import svgs from '../assets/svgs';
-import { Colors, Layout, ActionTypes, Screens } from '../constants';
+import { Colors, ActionTypes, Screens } from '../constants';
 import Logo from './Logo';
 import Svgicon from './Svgicon';
-
 
 class Headers extends React.Component {
   constructor(props) {
@@ -26,12 +20,25 @@ class Headers extends React.Component {
   }
 
   render() {
+if (this.props.navigation.state.routeName === "Home") {
+  leftRender =  <Button transparent style={appStyles.menuBtn} onPress={() => this.props.navigation.openDrawer()}>
+                  <Svgicon color={Colors.white} name="menu" />
+                </Button>
+
+  rightRender = <Button transparent style={appStyles.menuBtn} onPress={() => this.props.navigation.navigate(Screens.AddEditDrink.route)}>
+                  <Svgicon color={Colors.white} name="plus"/>
+                </Button>
+} else {
+  leftRender = <Button transparent style={appStyles.menuBtn} onPress={() => this.props.navigation.navigate(Screens.Home.route)}>
+                  <Svgicon color={Colors.white} name="arrow-left"/>
+                </Button>;
+  rightRender = <Text></Text>;
+}
+
     return (
         <Header transparent>
           <Left style={appStyles.row}>
-            <Button transparent style={appStyles.menuBtn} onPress={() => this.props.navigation.openDrawer()}>
-              <Svgicon color={Colors.white} name="menu" />
-            </Button>
+           {leftRender}
           </Left>
           <Body style={appStyles.rowXcenter}>
             <TouchableWithoutFeedback onPress={() => this.props.showModal()}>
@@ -39,9 +46,7 @@ class Headers extends React.Component {
             </TouchableWithoutFeedback>
           </Body>
           <Right style={appStyles.row}>
-            <Button transparent style={appStyles.menuBtn} onPress={() => this.props.navigation.navigate(Screens.AddEditDrink.route)}>
-              <Svgicon color={Colors.white} name="plus"/>
-            </Button>
+            {rightRender}
           </Right>
         </Header>
     );

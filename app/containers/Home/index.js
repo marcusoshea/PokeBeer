@@ -1,66 +1,91 @@
 import React from "react";
-import { StyleSheet, View, ImageBackground, Image} from 'react-native'
-import _ from 'lodash'; 
+import { View, ImageBackground } from 'react-native'
+import _ from 'lodash';
 import { Layout, Colors, Screens } from '../../constants';
-import { Logo, Svgicon, Headers, BeerItem, BeerInput } from '../../components';
+import { Svgicon, Headers } from '../../components';
 import imgs from '../../assets/images';
 import {
   Container,
   Content,
-  Icon,
-  Spinner,
   Button,
-  Text,
-  Header, Left, Body, Title, Right
+  Text
 } from 'native-base';
 import { connect } from "react-redux";
 import * as userActions from "../../actions/user";
 import * as beerActions from "../../actions/beer";
 import appStyles from '../../theme/appStyles';
-import styles from './styles';
 
-
+import { Rating } from 'react-native-elements';
 
 export const gatherBeers = (dispatch, token) => {
-  return async function(dispatch, getState) {
+  return async function (dispatch, getState) {
     const res = dispatch(beerActions.getBeers(token));
   };
 };
 
 
-
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.props.getTheBeers(this.props.token);
   }
 
-  
+  addOrEditBeerToNavigate(beer) {
+    this.props.navigation.navigate(Screens.AddEditDrink.route, { beer: beer });
+  }
 
-  render(){
-    this.props.getTheBeers(this.props.token);
-    console.log('beerList', this.props.beerList);
+  ratingCompleted(rating) {
+    console.log("Rating is: " + rating)
+  }
+
+  render() {
+    var myloop = [];
+    for (let i = 0; i < this.props.beerList.length; i++) {
+      myloop.push(
+        <View style={appStyles.contentBg} key={this.props.beerList[i].beerId}>
+          <Text style={{fontWeight: "bold", fontSize:20}}>{this.props.beerList[i].beerName}</Text>
+          <Text style={{paddingLeft: 10}}>{this.props.beerList[i].beerDescription}</Text>
+          <Rating
+            type='heart'
+            ratingColor='purple'
+            isDisabled={true}
+            ratingCount={5}
+            startingValue={Math.max(1,this.props.beerList[i].beerRating)}
+            imageSize={30}
+            readonly
+            ratingColor='black'
+            tintColor={Colors.secondaryLight}
+            onFinishRating={() => this.addOrEditBeerToNavigate(this.props.beerList[i])}
+          />
+          <Button transparent style={appStyles.rowBtn} onPress={() => this.addOrEditBeerToNavigate(this.props.beerList[i])}>
+            <Svgicon color={Colors.black} name="arrow-right" />
+          </Button>
+      </View>
+      );
+    }
+    if (this.props.beerList === undefined || this.props.beerList.length <= 0) {
+      myloop.push(
+        <View style={appStyles.contentBg}>
+          <Text>You haven't rated any drinks yet.</Text>
+          <Button transparent style={appStyles.rowBtn} onPress={() => this.props.navigation.navigate(Screens.AddEditDrink.route)}>
+            <Svgicon color={Colors.black} name="arrow-right" />
+          </Button>
+        </View>
+      );
+    }
     return (
       <Container style={appStyles.container}>
-        <ImageBackground 
-            source={imgs.bg} 
-            style={ { width: Layout.window.width, height: Layout.window.height }}>
+        <ImageBackground
+          source={imgs.bg}
+          style={{ width: Layout.window.width, height: Layout.window.height }}>
           <Headers {...this.props} />
           <Content enableOnAndroid style={appStyles.content}>
-            <View style={appStyles.contentBg}>
-
-              <Text>Lets fills this thing up 
-
-              { this.props.beerList[0].beerName }
-
-
-                
-                </Text>
-
+            <View>
+              {myloop}
             </View>
           </Content>
-         </ImageBackground>
-      </Container>     
+        </ImageBackground>
+      </Container>
     );
   }
 }
@@ -75,9 +100,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      logout: () => dispatch(userActions.logoutUser()),
-      getTheBeers: (token) => dispatch(gatherBeers(dispatch, token))
-   };
+    logout: () => dispatch(userActions.logoutUser()),
+    getTheBeers: (token) => dispatch(gatherBeers(dispatch, token))
+  };
 };
 
 // Exports
