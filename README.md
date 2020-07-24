@@ -22,3 +22,6 @@ Settings Screen:
     Delete Account
 Drawer Screen:
     Add easier way to close
+    
+Screenshot:
+    ![Image of Screenshot](https://github.com/marcusoshea/PokeBeer/blob/master/screenshot.png)
