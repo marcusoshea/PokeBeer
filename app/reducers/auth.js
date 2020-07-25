@@ -12,7 +12,8 @@ const auth = (state = initialState.auth, action) => {
       return {
         ...state,
         user: action.data.username,
-        token: action.data.token
+        token: action.data.token,
+        userId: action.data.id
       }
     }
     case ActionTypes.SIGNUP: {
@@ -24,7 +25,8 @@ const auth = (state = initialState.auth, action) => {
       return {
         ...state,
         user: null,
-        token: null
+        token: null,
+        userId: null
       }
     }
     // Default

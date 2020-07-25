@@ -17,16 +17,25 @@ class SignUpForm extends React.Component {
     return (
       <Form onSubmit={handleSubmit(onSubmit)} style={styles.loginForm}>
         <Field 
-          name="name" 
+          name="firstName" 
           component={InputBox} 
-          placeholder="Name"
+          placeholder="First Name"
           keyboardType={'default'}
           icon='user'
           iconStyle={{top:5,paddingLeft:15}}
-          validate={[required({msg: 'Name Required'})]}
+          validate={[required({msg: 'First Name Required'})]}
         />
         <Field 
-          name="email" 
+          name="lastName" 
+          component={InputBox} 
+          placeholder="Last Name"
+          keyboardType={'default'}
+          icon='user'
+          iconStyle={{top:5,paddingLeft:15}}
+          validate={[required({msg: 'Last Name Required'})]}
+        />
+        <Field 
+          name="username" 
           component={InputBox} 
           placeholder="Email"
           keyboardType={'email-address'}
@@ -42,15 +51,6 @@ class SignUpForm extends React.Component {
           icon='lock'
           iconStyle={{top:5,paddingLeft:15}}
           validate={[required({msg: 'Password Required'}),length({ minimum: 4,msg: 'Password too short' })]}
-        />
-        <Field 
-          name="confirmpass" 
-          component={InputBox} 
-          placeholder="Confirm Password"
-          secureTextEntry={true}
-          icon='lock'
-          iconStyle={{top:5,paddingLeft:15}}
-          validate={[confirmation({ field: 'password', msg: 'Password does not match' })]}
         />
       </Form>
     )

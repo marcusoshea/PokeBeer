@@ -44,7 +44,8 @@ export default StyleSheet.create({
     paddingRight: Layout.indent,
     flex:1,
     margin: 10,
-    borderRadius: 4
+    borderRadius: 4,
+    textAlignVertical: 'center'
   },
   modalContent: {
     backgroundColor: 'white',

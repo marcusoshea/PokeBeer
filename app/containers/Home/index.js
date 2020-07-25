@@ -30,8 +30,8 @@ class Home extends React.Component {
     this.props.getTheBeers(this.props.token);
   }
 
-  addOrEditBeerToNavigate(beer) {
-    this.props.navigation.navigate(Screens.AddEditDrink.route, { beer: beer });
+  addOrEditBeerToNavigate(user, beer) {
+    this.props.navigation.navigate(Screens.AddEditDrink.route, { userId: userId, beer: beer });
   }
 
   ratingCompleted(rating) {
@@ -40,6 +40,7 @@ class Home extends React.Component {
 
   render() {
     var myloop = [];
+    
     for (let i = 0; i < this.props.beerList.length; i++) {
       myloop.push(
         <View style={appStyles.contentBg} key={this.props.beerList[i].beerId}>
@@ -56,7 +57,7 @@ class Home extends React.Component {
             ratingColor='black'
             tintColor={Colors.secondaryLight}
           />
-          <Button transparent style={appStyles.rowBtn} onPress={() => this.addOrEditBeerToNavigate(this.props.beerList[i])}>
+          <Button transparent style={appStyles.rowBtn} onPress={() => this.addOrEditBeerToNavigate(this.props.user, this.props.beerList[i])}>
             <Svgicon color={Colors.black} name="arrow-right" />
           </Button>
       </View>
@@ -64,14 +65,15 @@ class Home extends React.Component {
     }
     if (this.props.beerList === undefined || this.props.beerList.length <= 0) {
       myloop.push(
-        <View style={appStyles.contentBg}>
-          <Text>You haven't rated any drinks yet.</Text>
+        <View key="1" style={appStyles.contentBg}>
+          <Text style={{paddingTop:30}}>You haven't rated any drinks yet.</Text>
           <Button transparent style={appStyles.rowBtn} onPress={() => this.props.navigation.navigate(Screens.AddEditDrink.route)}>
-            <Svgicon color={Colors.black} name="arrow-right" />
+            <Svgicon color={Colors.black} name="more" />
           </Button>
         </View>
       );
     }
+
     return (
       <Container style={appStyles.container}>
         <ImageBackground
@@ -93,7 +95,8 @@ const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
     token: state.auth.token,
-    beerList: state.beer.beerList
+    beerList: state.beer.beerList,
+    userId: state.auth.id
   };
 };
 

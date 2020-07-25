@@ -31,7 +31,7 @@ const execute = async (path, method = 'GET', { params = {} , queries = {}, paylo
   }
 
   if ( ! headers['Content-Type']) {
-    headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    headers['Content-Type'] = 'application/json';
   }
 
   if ( ! headers['Accept']) {

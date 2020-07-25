@@ -162,6 +162,7 @@ const mapStateToProps = (state) => {
   // Redux Store --> Component
   return {
     isLoading: state.common.isLoading,
+    userId: state.auth.id,
     user: state.auth.user,
     token: state.auth.token,
     language: state.auth.language,

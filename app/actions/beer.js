@@ -26,3 +26,32 @@ export const getBeers = payloads => dispatch => {
       console.log("ERROR: ====", err);
     });
 }
+
+export const editBeer = payloads => dispatch => {
+  dispatch({ type: ActionTypes.LOADING, isLoading: true });
+  return axios.post(url.editBeer,  {payloads: payloads}).then(res => {
+    // console.log("res", res.data);
+    dispatch({ type: ActionTypes.LOADING, isLoading: false });
+      if(res.status == 200){
+        return res.data;
+      } else {
+        console.info('ttt', res);
+        return res;
+      }
+    })
+}
+
+
+export const addBeer = payloads => dispatch => {
+  dispatch({ type: ActionTypes.LOADING, isLoading: true });
+  return axios.post(url.addBeer,  {payloads: payloads}).then(res => {
+    // console.log("res", res.data);
+    dispatch({ type: ActionTypes.LOADING, isLoading: false });
+      if(res.status == 200){
+        return res.data;
+      } else {
+        console.info('ttt', res);
+        return res;
+      }
+    })
+}
