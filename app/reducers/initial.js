@@ -12,6 +12,7 @@ export const initialState = {
 		languageSet:0
 	},
 	beer:{
-		beerList: []
+		beerList: [],
+		selectedBeer:null
 	}
 };

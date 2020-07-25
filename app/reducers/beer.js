@@ -11,6 +11,12 @@ const beer = (state = initialState.beer, action) => {
         beerList: action.data
       }
     }
+    case ActionTypes.SELECTEDBEER: {
+      return {
+        ...state,
+        selectedBeer: action.data
+      }
+    }
     // Default
     default: {
       return state;

@@ -54,7 +54,9 @@ if (this.props.navigation.state.routeName === "Home") {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    userId: state.auth.userId
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

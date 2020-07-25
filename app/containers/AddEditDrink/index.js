@@ -27,80 +27,85 @@ import appStyles from '../../theme/appStyles';
 import styles from './styles';
 import BeerForm from './form';
 
+
+export const drinkBeer = (values, state, props, dispatch) => {
+  return async function (dispatch, getState) {
+  values.beerImageLink = '';
+  values.beerId = state.beerId;
+  if (values.beerRating === undefined) {
+    values.beerRating = 3;
+  }
+
+  if (state.beerId > 0) {
+    dispatch(beerActions.editBeer(values, state.userId, state.token))
+      .then(res => {
+        showToast("Bottoms Up!", "success");
+          setTimeout(function(){ 
+            dispatch(NavigationActions.navigate({ routeName: Screens.Home.route })); }, 2000);
+      })
+      .catch(error => {
+        const messages = _.get(error, 'response.data.error')
+        message = (_.values(messages) || []).join(',')
+        if (message) {
+          showToast(message, "danger");
+        }
+        console.log(`
+        Error messages returned from server:`, messages)
+      });
+
+  } else {
+    if (values.beerRating === undefined) {
+      values.beerRating = 3;
+    }
+    dispatch(beerActions.addBeer(values, state.userId, state.token))
+      .then(res => {
+          showToast("Bottoms Up!", "success");
+          setTimeout(function(){ 
+            dispatch(NavigationActions.navigate({ routeName: Screens.Home.route })); }, 2000);
+      })
+      .catch(error => {
+        const messages = _.get(error, 'response.data.error')
+        message = (_.values(messages) || []).join(',')
+        if (message) {
+          showToast(message, "danger");
+        }
+        console.log(`
+        Error messages returned from server:`, messages)
+      });
+  }
+};
+} 
+
+
 class AddEditDrink extends React.Component {
   constructor(props) {
     super(props);
-    console.log('ttttttttttt', this.props);
-    this.state = {
-      BeerId: '',
-      BeerName: '',
-      BeerDescription: '',
-      BeerRating: '1',
-      BeerImageLink: '',
-      user:''
-    };
-    if (this.props.navigation.state && this.props.navigation.state.params) {
+    if (this.props && this.props.state && this.props.state.beer && this.props.state.beer.selectedBeer) {
       this.state = {
-        BeerId: this.props.navigation.state.params.beer.BeerId,
-        BeerName: this.props.navigation.state.params.beer.BeerName,
-        BeerDescription: this.props.navigation.state.params.beer.BeerDescription,
-        BeerRating: this.props.navigation.state.params.beer.BeerRating,
-        BeerImageLink: this.props.navigation.state.params.beer.BeerImageLink,
-        userId: this.props.navigation.state.params.userId
+        beerId: this.props.state.beer.selectedBeer.beerId,
+        beerName: this.props.state.beer.selectedBeer.beerName,
+        beerDescription: this.props.state.beer.selectedBeer.beerDescription,
+        beerRating: this.props.state.beer.selectedBeer.beerRating,
+        beerImageLink: '',
+        userId: this.props.state.auth.userId,
+        token: this.props.token
+      };
+    } else {
+      this.state = {
+        beerId: '',
+        beerName: '',
+        beerDescription: '',
+        beerRating: 3,
+        beerImageLink: '',
+        userId: this.props.state.auth.userId,
+        token: this.props.token
       };
     }
   }
 
-  handleBeer(values, dispatch, props) {
-    console.log('ttttt', props);
-    if (props.beerData.BeerId.length > 0) {
-      
-      values.push({"BeerId":props.beerData.BeerId});
 
-      dispatch(beerActions.editBeer(values))
-        .then(res => {
-          if (res.status == 200) {
-            showToast(res.msg, "success");
-            dispatch(NavigationActions.navigate({ routeName: Screens.SignIn.route }));
-            // this.props.navigation.navigate(Screens.SignIn.route)
-          } else {
-            showToast(res.msg, "danger");
-          }
-        })
-        .catch(error => {
-          const messages = _.get(error, 'response.data.error')
-          message = (_.values(messages) || []).join(',')
-          if (message) {
-            showToast(message, "danger");
-          }
-          console.log(`
-          Error messages returned from server:`, messages)
-        });
-    } else {
 
-      values.push({"user":props.user});
 
-      dispatch(beerActions.addBeer(values))
-        .then(res => {
-          if (res.status == 200) {
-            showToast(res.msg, "success");
-            dispatch(NavigationActions.navigate({ routeName: Screens.SignIn.route }));
-            // this.props.navigation.navigate(Screens.SignIn.route)
-          } else {
-            showToast(res.msg, "danger");
-          }
-        })
-        .catch(error => {
-          const messages = _.get(error, 'response.data.error')
-          message = (_.values(messages) || []).join(',')
-          if (message) {
-            showToast(message, "danger");
-          }
-          console.log(`
-          Error messages returned from server:`, messages)
-        });
-    }
-  } 
 
   render() {
     return (
@@ -110,7 +115,7 @@ class AddEditDrink extends React.Component {
           style={{ width: Layout.window.width, height: Layout.window.height }}>
           <Headers {...this.props} />
           <Content enableOnAndroid style={appStyles.content}>
-            <BeerForm beerData={this.state} onSubmit={this.handleBeer} />
+            <BeerForm beerData={this.state} onSubmit={(values) => this.props.handleBeer(values, this.state, this.props)} />
             <Animatable.View
               animation="fadeIn"
               delay={1000}
@@ -138,7 +143,8 @@ const mapStateToProps = (state) => {
   return {
     state: state,
     user: state.auth.user,
-    token: state.auth.token
+    token: state.auth.token,
+    selectedBeer: state.beer.selectedBeer
   };
 };
 
@@ -146,7 +152,7 @@ const mapDispatchToProps = (dispatch) => {
   // Action
   return {
     pourBeer: () => dispatch(submit('beerForm')),
-    handleBeer: (beer) => dispatch(beerActions.addBeer(beer)),
+    handleBeer: (values, beerState, beerProps) => dispatch(drinkBeer(values, beerState, beerProps, dispatch)),
   };
 };
 

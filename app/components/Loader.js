@@ -44,7 +44,6 @@ class Loader extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    language: state.auth.language,
   };
 };
 

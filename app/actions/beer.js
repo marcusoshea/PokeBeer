@@ -27,31 +27,45 @@ export const getBeers = payloads => dispatch => {
     });
 }
 
-export const editBeer = payloads => dispatch => {
+export const editBeer = (payloads, userId, token) => dispatch => {
+  var postUrl = url.editBeer + userId;
   dispatch({ type: ActionTypes.LOADING, isLoading: true });
-  return axios.post(url.editBeer,  {payloads: payloads}).then(res => {
-    // console.log("res", res.data);
+  var headers = {
+    'Content-Type': 'application/json',
+    "Authorization" : `Bearer ${token}`
+  }
+  return axios.put(postUrl, {payloads,  headers})
+  .then(res => {
     dispatch({ type: ActionTypes.LOADING, isLoading: false });
-      if(res.status == 200){
-        return res.data;
-      } else {
-        console.info('ttt', res);
-        return res;
-      }
-    })
-}
+    if(res.status == 200){
+      return res.data;
+    } else {
+      return res;
+    }
+    }).catch((err) => {
+      dispatch({ type: ActionTypes.LOADING, isLoading: false });
+      console.log("ERROR: ====", err);
+    });
+  }
 
 
-export const addBeer = payloads => dispatch => {
+export const addBeer = (payloads, userId, token) => dispatch => {
+  var postUrl = url.addBeer + userId;
   dispatch({ type: ActionTypes.LOADING, isLoading: true });
-  return axios.post(url.addBeer,  {payloads: payloads}).then(res => {
-    // console.log("res", res.data);
+  var headers = {
+    'Content-Type': 'application/json',
+    "Authorization" : `Bearer ${token}`
+  }
+  return axios.post(postUrl, {payloads,  headers})
+  .then(res => {
     dispatch({ type: ActionTypes.LOADING, isLoading: false });
-      if(res.status == 200){
-        return res.data;
-      } else {
-        console.info('ttt', res);
-        return res;
-      }
-    })
-}
+    if(res.status == 200){
+      return res.data;
+    } else {
+      return res;
+    }
+    }).catch((err) => {
+      dispatch({ type: ActionTypes.LOADING, isLoading: false });
+      console.log("ERROR: ====", err);
+    });
+  }

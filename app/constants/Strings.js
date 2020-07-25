@@ -21,14 +21,6 @@ export default[
 		settings: 'Settings',
 		drinks: 'Drinks',
 
-		// App intro sliders
-		slide1Title: 'SAMPLE TITLE 1',
-		slide1Text: 'This is sample description 1',
-		slide2Title: 'SAMPLE TITLE 2',
-		slide2Text: 'This is sample description 2',
-		slide3Title: 'SAMPLE TITLE 3',
-		slide3Text: 'This is sample description 3',
-
 		//Validation messages
 		required: 'is required',
 		notValid: 'is not valid',

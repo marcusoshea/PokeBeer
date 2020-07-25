@@ -40,7 +40,7 @@ const execute = async (path, method = 'GET', { params = {} , queries = {}, paylo
 
   const options = { method, headers };
 
-  if (method === 'POST' || method === 'PATCH') {
+  if (method === 'POST' || method === 'PATCH' || method === 'PUT') {
     options.data = JSON.stringify(payloads);
   }
 
@@ -60,4 +60,5 @@ export default {
   post: (path, options) => execute(path, 'POST', options),
   patch: (path, options) => execute(path, 'PATCH', options),
   delete: (path, options) => execute(path, 'DELETE', options),
+  put: (path, options) => execute(path, 'PUT', options),
 };

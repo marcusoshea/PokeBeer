@@ -32,6 +32,7 @@ export default StyleSheet.create({
     fontFamily: 'Font-Regular',
   },
   btnSecontary:{
+    marginTop: 20,
     backgroundColor: Colors.secondary,
     fontFamily: 'Font-Regular',
   },

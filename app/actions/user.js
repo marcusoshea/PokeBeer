@@ -33,7 +33,6 @@ export const signup = payloads => dispatch => {
       if(res.status == 200){
         return res.data;
       } else {
-        console.info('ttt', res);
         return res;
       }
     })
