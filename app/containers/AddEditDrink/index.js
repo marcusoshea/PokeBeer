@@ -39,7 +39,7 @@ export const drinkBeer = (values, state, props, dispatch) => {
   if (state.beerId > 0) {
     dispatch(beerActions.editBeer(values, state.userId, state.token))
       .then(res => {
-        showToast("Bottoms Up!", "success");
+        showToast("Bottoms Up!", "success", 3000);
           setTimeout(function(){ 
             dispatch(NavigationActions.navigate({ routeName: Screens.Home.route })); }, 2000);
       })
@@ -59,7 +59,7 @@ export const drinkBeer = (values, state, props, dispatch) => {
     }
     dispatch(beerActions.addBeer(values, state.userId, state.token))
       .then(res => {
-          showToast("Bottoms Up!", "success");
+          showToast("Bottoms Up!", "success", 3000);
           setTimeout(function(){ 
             dispatch(NavigationActions.navigate({ routeName: Screens.Home.route })); }, 2000);
       })
@@ -76,6 +76,25 @@ export const drinkBeer = (values, state, props, dispatch) => {
 };
 } 
 
+export const throwAwayBeer = (state, dispatch) => {
+  return async function (dispatch) {
+    dispatch(beerActions.throwAwayBeer(state.userId, state.beerId, state.token))
+      .then(res => {
+        showToast("All the rum is gone.", "success", 3000);
+          setTimeout(function(){ 
+            dispatch(NavigationActions.navigate({ routeName: Screens.Home.route })); }, 2000);
+      })
+      .catch(error => {
+        const messages = _.get(error, 'response.data.error')
+        message = (_.values(messages) || []).join(',')
+        if (message) {
+          showToast(message, "danger");
+        }
+        console.log(`
+        Error messages returned from server:`, messages)
+      });
+  };
+} 
 
 class AddEditDrink extends React.Component {
   constructor(props) {
@@ -103,10 +122,6 @@ class AddEditDrink extends React.Component {
     }
   }
 
-
-
-
-
   render() {
     return (
       <Container style={appStyles.container}>
@@ -115,7 +130,7 @@ class AddEditDrink extends React.Component {
           style={{ width: Layout.window.width, height: Layout.window.height }}>
           <Headers {...this.props} />
           <Content enableOnAndroid style={appStyles.content}>
-            <BeerForm beerData={this.state} onSubmit={(values) => this.props.handleBeer(values, this.state, this.props)} />
+          <BeerForm beerData={this.state} onSubmit={(values) => this.props.handleBeer(values, this.state, this.props)} />
             <Animatable.View
               animation="fadeIn"
               delay={1000}
@@ -128,7 +143,24 @@ class AddEditDrink extends React.Component {
                   style={appStyles.btnSecontary}
                   onPress={() => this.props.pourBeer()}
                 >
-                  <Text>Update</Text>
+                  <Text style={{ fontWeight: 'bold', fontSize:16 }}>Update</Text>
+                </Button>
+              }
+            </Animatable.View>
+
+            <Animatable.View
+              animation="fadeIn"
+              delay={1000}
+              style={{ flex: 0.2,}}>
+              {this.props.isLoading ?
+                <Spinner color={Colors.secondary} /> :
+                <Button
+                  full
+                  primary
+                  style={appStyles.btnDelete}
+                  onPress={() => this.props.removeBeer(this.state)}
+                >
+                  <Text>Remove</Text>
                 </Button>
               }
             </Animatable.View>
@@ -153,6 +185,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     pourBeer: () => dispatch(submit('beerForm')),
     handleBeer: (values, beerState, beerProps) => dispatch(drinkBeer(values, beerState, beerProps, dispatch)),
+    removeBeer: (beerState) => dispatch(throwAwayBeer(beerState, dispatch)),
   };
 };
 

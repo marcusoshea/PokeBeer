@@ -23,6 +23,8 @@ export const getBeers = payloads => dispatch => {
         return
       }
     }).catch((err) => {
+      dispatch({ type: ActionTypes.LOGOUT});
+      dispatch(NavigationActions.navigate({ routeName: Screens.SignOutStack.route }));
       console.log("ERROR: ====", err);
     });
 }
@@ -48,6 +50,26 @@ export const editBeer = (payloads, userId, token) => dispatch => {
     });
   }
 
+export const throwAwayBeer = (userId, beerId, token) => dispatch => {
+  var postUrl = url.deleteBeer + '/'+ userId + '/' + beerId;
+  dispatch({ type: ActionTypes.LOADING, isLoading: true });
+  var headers = {
+    'Content-Type': 'application/json',
+    "Authorization" : `Bearer ${token}`
+  }
+  return axios.delete(postUrl, {headers})
+  .then(res => {
+    dispatch({ type: ActionTypes.LOADING, isLoading: false });
+    if(res.status == 200){
+      return res.data;
+    } else {
+      return res;
+    }
+    }).catch((err) => {
+      dispatch({ type: ActionTypes.LOADING, isLoading: false });
+      console.log("ERROR: ====", err);
+    });
+  }
 
 export const addBeer = (payloads, userId, token) => dispatch => {
   var postUrl = url.addBeer + userId;

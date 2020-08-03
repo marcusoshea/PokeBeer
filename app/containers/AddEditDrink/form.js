@@ -41,7 +41,7 @@ class BeerForm extends React.Component {
           component={InputBox}
           placeholder="Drink Name"
           keyboardType={'default'}
-          icon='user'
+          icon='rest'
           iconStyle={{ top: 5, paddingLeft: 15 }}
           validate={[required({ msg: 'Drink Name Required' })]}
         />
@@ -50,7 +50,7 @@ class BeerForm extends React.Component {
           component={InputBox}
           placeholder="Description"
           keyboardType={'default'}
-          icon='user'
+          icon='tago'
           iconStyle={{ top: 5, paddingLeft: 15 }}
         />
         <Field

@@ -32,8 +32,13 @@ export default StyleSheet.create({
     fontFamily: 'Font-Regular',
   },
   btnSecontary:{
-    marginTop: 20,
+    marginTop: 30,
     backgroundColor: Colors.secondary,
+    fontFamily: 'Font-Regular',
+  },
+  btnDelete:{
+    marginTop: 50,
+    backgroundColor: Colors.clear,
     fontFamily: 'Font-Regular',
   },
   content:{

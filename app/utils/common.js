@@ -2,13 +2,13 @@ import React from 'react';
 import { Toast, Icon } from 'native-base';
 import { Strings } from '../constants';
 
-const showToast = (msg,type) => {
+const showToast = (msg,type, duration) => {
 	if(msg=='') return;
 	Toast.show({
 	    text: msg,
 	    buttonText: "Okay",
 	    type: type || 'default',
-	    duration:4000,
+	    duration: duration || 4000,
 	    position: "top",
 	    style:{marginTop:25}
 	  });

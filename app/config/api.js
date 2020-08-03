@@ -6,5 +6,6 @@ export default {
   addBeer: 'beers/add/',
   editBeer: 'beers/update/',
   getBeers: 'beers',
-  getBeer: 'beers'
+  getBeer: 'beers',
+  deleteBeer: 'beers'
 }
