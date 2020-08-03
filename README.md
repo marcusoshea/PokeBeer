@@ -11,8 +11,8 @@ Home Screen:<br/>
 Add/Edit Screen:<br/>
     Form for adding/editing<br/>
     Able to delete drink<br/>
-Forgot Password Screen:<br/>    
-    Created<br/><br/>
+Forgot Password Screen:<br/>
+Created<br/><br/>
     
 TODO:<br/>
 Home Screen:<br/>
