@@ -8,14 +8,14 @@ Login Screen:<br/>
     Completed<br/>
 Home Screen:<br/>
     Show beer name, description, rating<br/><br/>
+Add/Edit Screen:<br/>
+    Form for adding/editing<br/><br/>
 
 Still a lot of work TODO:<br/>
 Home Screen:<br/>
     Search<br/>
     Sort<br/>
     Infinite Scroll<br/>
-Add/Edit Screen:<br/>
-    Form for adding/editing<br/>
 Settings Screen:<br/>
     Change Email<br/>
     Change Password<br/>
