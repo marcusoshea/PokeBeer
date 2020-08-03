@@ -10,6 +10,7 @@ Home Screen:<br/>
     Show beer name, description, rating<br/><br/>
 Add/Edit Screen:<br/>
     Form for adding/editing<br/><br/>
+    Able to delete drink
 
 Still a lot of work TODO:<br/>
 Home Screen:<br/>
