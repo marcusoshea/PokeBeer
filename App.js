@@ -3,7 +3,8 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { PersistGate } from 'redux-persist/es/integration/react'
 import { Provider } from 'react-redux';
-import { Font, AppLoading } from 'expo';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
 import { FontAwesome, Ionicons, AntDesign } from '@expo/vector-icons';
 
 import { StyleProvider, Root } from 'native-base';
@@ -39,7 +40,8 @@ export default class App extends React.Component {
     }
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
+    console.disableYellowBox = true;
     await Font.loadAsync({
       // 'Ionicons': require('native-base/Fonts/Ionicons.ttf'),
       ...Ionicons.font,

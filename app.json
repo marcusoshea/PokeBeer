@@ -4,7 +4,6 @@
     "slug": "PokeBeer",
     "description": "A drink tracking application to rate your favorite and not so favorite drinks ",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android",

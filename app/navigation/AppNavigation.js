@@ -10,6 +10,8 @@ const transitionConfig = () => ({
         duration: 300,
         easing: Easing.out(Easing.poly(4)),
         timing: Animated.timing,
+        
+    useNativeDriver: true
       },
       screenInterpolator: sceneProps => {
         const { layout, position, scene } = sceneProps;
