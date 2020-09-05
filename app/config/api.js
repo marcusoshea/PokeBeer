@@ -1,5 +1,5 @@
 export default {
-  apiBaseUrl: 'http://woods-end.org:8001/pokeapi/',
+  apiBaseUrl: 'http://drinkapi.imaginedthenmade.com:8001/pokeapi/',
   signin: 'Users/authenticate',
   signup: 'Users/register',
   getUserInfo: 'Users/',
