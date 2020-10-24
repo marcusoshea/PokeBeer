@@ -10,7 +10,7 @@ const showToast = (msg,type, duration) => {
 	    type: type || 'default',
 	    duration: duration || 4000,
 	    position: "top",
-	    style:{marginTop:25}
+	    style:{marginTop:25, color:'black'}
 	  });
 }
 const getCurrentRoute = (state: Object) => {

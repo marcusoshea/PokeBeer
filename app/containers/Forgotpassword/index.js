@@ -25,6 +25,7 @@ import * as userActions from "../../actions/user";
 import appStyles from '../../theme/appStyles';
 import styles from './styles';
 import ForgotForm from './form';
+import { showToast } from '../../utils/common';
 
 class Forgotpassword extends React.Component {
   constructor(props) {
@@ -35,21 +36,13 @@ class Forgotpassword extends React.Component {
     dispatch(userActions.forgotpassword(values))
       .then(res => {
         if(res.status == 200){
-          showToast(res.msg,"success");
-          dispatch(NavigationActions.navigate({ routeName: Screens.SignInStack.route }));
-          // this.props.navigation.navigate(Screens.SignInStack.route)
+          console.info('got here')
+          showToast(res.data.message,"success");
+          dispatch(NavigationActions.navigate({ routeName: Screens.SignIn.route }));
+
         }else{
-          showToast(res.msg,"danger");
+          showToast(res.data.message,"danger");
         }
-      })
-      .catch(error => {
-        const messages = _.get(error, 'response.data.error')
-        message = (_.values(messages) || []).join(',')
-        if (message){
-         showToast(message,"danger");
-       }
-       console.log(`
-          Error messages returned from server:`, messages )
       });
   }
 

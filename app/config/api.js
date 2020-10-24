@@ -3,6 +3,7 @@ export default {
   signin: 'Users/authenticate',
   signup: 'Users/register',
   getUserInfo: 'Users/',
+  getForgotPasswordToken: 'Users/forgot-password',
   addBeer: 'beers/add/',
   editBeer: 'beers/update/',
   getBeers: 'beers',
