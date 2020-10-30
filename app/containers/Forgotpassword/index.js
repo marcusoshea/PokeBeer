@@ -27,7 +27,7 @@ import styles from './styles';
 import ForgotForm from './form';
 import { showToast } from '../../utils/common';
 
-class Forgotpassword extends React.Component {
+class ForgotPassword extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -36,10 +36,8 @@ class Forgotpassword extends React.Component {
     dispatch(userActions.forgotpassword(values))
       .then(res => {
         if(res.status == 200){
-          console.info('got here')
           showToast(res.data.message,"success");
           dispatch(NavigationActions.navigate({ routeName: Screens.SignIn.route }));
-
         }else{
           showToast(res.data.message,"danger");
         }
@@ -47,7 +45,7 @@ class Forgotpassword extends React.Component {
   }
 
   render(){
-    const { language } = this.props;
+
     return (
       <Container style={appStyles.container}>
         <ImageBackground 
@@ -109,4 +107,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 // Exports
-export default connect(mapStateToProps, mapDispatchToProps)(Forgotpassword);
+export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);

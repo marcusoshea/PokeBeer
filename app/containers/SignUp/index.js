@@ -61,7 +61,7 @@ class SignUp extends React.Component {
   }
 
   render(){
-    const { language } = this.props;
+
     return (
       <Container style={appStyles.container}>
         <ImageBackground 

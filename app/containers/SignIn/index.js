@@ -45,7 +45,7 @@ class SignIn extends React.Component {
     this.props.navigation.navigate(Screens.SignUp.route)
   }
 
-  onForgotpasswordPressHandler(){
+  onForgotPasswordPressHandler(){
     this.props.navigation.navigate(Screens.ForgotPassword.route)
   }
 
@@ -84,7 +84,7 @@ class SignIn extends React.Component {
   }
 
   render(){
-    const { language } = this.props;
+
     if(this.props.user==null || this.props.token==null){
       // Login 
       return (
@@ -120,7 +120,7 @@ class SignIn extends React.Component {
                       </Col>
                       <Col>
                         <Button transparent full  
-                          onPress={() => this.onForgotpasswordPressHandler()}
+                          onPress={() => this.onForgotPasswordPressHandler()}
                           style={[styles.linkTextBtn,{justifyContent:'flex-end'}]}
                         >
                           <Text style={[styles.linkText,appStyles.textRight]} > Forgot Password </Text>

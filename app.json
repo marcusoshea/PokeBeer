@@ -2,14 +2,14 @@
   "expo": {
     "name": "PokeBeer",
     "slug": "PokeBeer",
-    "description": "A drink tracking application to rate your favorite and not so favorite drinks ",
-    "privacy": "public",
+    "description": "A drink tracking application to rate your favorite and not so favorite drinks. Still in beta.",
+    "privacy": "unlisted",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
     "splash": {
@@ -24,7 +24,23 @@
       "app/assets/*"
     ],
     "android": {
-      "package": "com.moshea.pokebeer"
+      "package": "com.moshea.pokebeer",
+      "permissions": [],
+      "versionCode": 2,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [{
+            "scheme": "PokeBeer",
+            "pathPrefix": "/*"
+          }],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
     },
     "ios": {
       "supportsTablet": true,
